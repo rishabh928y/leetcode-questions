@@ -124,25 +124,25 @@ class Solution {
     
     void mirrorTree(Node* root) {
         
-        if(root == NULL) {
-            return;
-        }
-        
-        mirrorTree(root->left);
-        mirrorTree(root->right);
-        
-        Node* temp = root->left;
-        root->left = root->right;
-        root->right = temp;
         
         // return;
     }
     
     void mirror(Node* root) {
         
-        mirrorTree(root);
+        // mirrorTree(root);
         // inorderTraversal(root);
         
+        if(root == NULL) {
+            return;
+        }
+        
+        mirror(root->left);
+        mirror(root->right);
+        
+        Node* temp = root->left;
+        root->left = root->right;
+        root->right = temp;
         // return;
         
     }
