@@ -111,27 +111,8 @@ class Solution {
   public:
     // Function to convert a binary tree into its mirror tree.
     
-    void inorderTraversal(Node* root) {
-        if(root == NULL) {
-            return;
-        }
-        
-        inorderTraversal(root->left);
-        inorderTraversal(root->right);
-        
-        // return;
-    }
-    
-    void mirrorTree(Node* root) {
-        
-        
-        // return;
-    }
     
     void mirror(Node* root) {
-        
-        // mirrorTree(root);
-        // inorderTraversal(root);
         
         if(root == NULL) {
             return;
@@ -143,7 +124,6 @@ class Solution {
         Node* temp = root->left;
         root->left = root->right;
         root->right = temp;
-        // return;
         
     }
     
