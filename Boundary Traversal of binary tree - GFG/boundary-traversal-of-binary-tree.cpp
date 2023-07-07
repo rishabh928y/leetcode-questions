@@ -101,14 +101,32 @@ struct Node
 {
     int data;
     Node* left, * right;
-}; */ 
+}; */
 
 class Solution {
 public:
+
+    void traverseLeft(Node* root, vector<int>& ans) {
+         
+         if(!root || (!root->left && !root->right) ) {
+             return;
+         }
+         
+         ans.push_back(root->data);
+         
+         if(root->left) {
+             traverseLeft(root->left, ans);
+         }
+         else {
+             traverseLeft(root->right, ans);
+         }
+         
+    }
     
     void traverseLeaf(Node* root, vector<int>& ans) {
-         
-         if(!root) return;
+         if(!root) {
+             return;
+         }    
          
          if(!root->left && !root->right) {
              ans.push_back(root->data);
@@ -120,44 +138,28 @@ public:
          
     }
     
-    void traverseLeft(Node* root, vector<int>& ans) {
-        
-        if(!root || (!root->left && !root->right) ) {
-            return;
-        }
-        
-        ans.push_back(root->data);
-        
-        if(root->left) {
-            traverseLeft(root->left, ans);
-        }
-        else {
-            traverseLeft(root->right, ans);
-        }
-        
-    }
-    
     void traverseRight(Node* root, vector<int>& ans) {
         
-        if(!root || (!root->left && !root->right) ) {
-            return;
-        }
-        
-        if(root->right) {
-            traverseRight(root->right, ans);
-        }
-        else {
-            traverseRight(root->left, ans);
-        }
-        
-        ans.push_back(root->data);
-        
+         if(!root || (!root->left && !root->right)) {
+             return;
+         } 
+         
+         if(root->right) {
+             traverseRight(root->right, ans);
+         }
+         else {
+             traverseRight(root->left, ans);
+         }
+         
+         ans.push_back(root->data);
     }
+    
 
     vector <int> boundary(Node *root)
     {
-        
+         
         vector<int> ans;
+        
         if(!root) {
             return ans;
         }
@@ -173,7 +175,6 @@ public:
         
     }
 };
-
 
 //{ Driver Code Starts.
 
