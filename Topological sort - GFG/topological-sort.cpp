@@ -8,44 +8,44 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order.
 	
-	stack<int> s;
-	
-	void dfs(vector<int> adj[], int u, vector<bool>& visited) {
-	    
-	    visited[u] = true;
-	    
-	    for(int v : adj[u]) {
-	        
-	        if(!visited[v]) {
-	            dfs(adj, v, visited);
-	        }
-	        
-	    }
-	    
-	    s.push(u);
-	    
-	}
-	
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    
-	    vector<bool> visited(V, false);
+	    vector<int> inDegree(V, 0);
 	    
 	    for(int i=0; i<V; i++) {
-	        
-	        if(!visited[i]) {
-	            dfs(adj, i, visited);
+	        for(auto it : adj[i]) {
+	            inDegree[it]++;
 	        }
 	    }
 	    
-	    vector<int> ans;
+	    queue<int> q;
 	    
-	    while(!s.empty()) {
-	        ans.push_back(s.top());
-	        s.pop();
+	    for(int i=0; i<V; i++) {
+	        if(inDegree[i] == 0) {
+	            q.push(i);
+	        }
 	    }
 	    
-	    return ans;
+	    vector<int> topo;
+	    
+	    while(!q.empty()) {
+	        int curr = q.front();
+	        q.pop();
+	        
+	        topo.push_back(curr);
+	        // curr is in topo sort;
+	        // so please remove it from in degree;
+	        
+	        for(auto it : adj[curr]) {
+	            inDegree[it]--;
+	            if(inDegree[it] == 0) q.push(it);
+	        }
+	        
+	        
+	    }
+	    
+	    return topo;
 	}
 };
 
