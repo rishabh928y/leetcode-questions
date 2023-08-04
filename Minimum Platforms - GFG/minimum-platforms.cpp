@@ -32,7 +32,7 @@ class Solution{
                count++;
            }
            else{
-               pq.pop();
+              pq.pop();
            }
            pq.push(arr2[i].second);
            
