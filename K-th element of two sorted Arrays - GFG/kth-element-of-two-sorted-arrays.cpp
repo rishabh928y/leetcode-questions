@@ -9,32 +9,44 @@ class Solution{
     int kthElement(int arr1[], int arr2[], int n, int m, int k)
     {
         
-        int len = m+n;
-        int arr[len];
-        int i = 0;
-        int j = 0;
-        int d = 0;
+        int i=0, j=0;
         
-        while(i < n && j < m) {
+        int count = 0;
+        
+        int ans = -1;
+       
+        while(count < k && i < n && j < m) {
             
             if(arr1[i] < arr2[j]) {
-                arr[d++] = arr1[i++];
+                ans = arr1[i];
+                i++;
+                count++;
             }
             else {
-                arr[d++] = arr2[j++];
+                ans = arr2[j];
+                j++;
+                count++;
             }
             
+        }     
+        
+        if(i == n) {
+            while(j < m && count < k) {
+                 ans = arr2[j];
+                 j++;
+                 count++;
+            }
         }
         
-        while(i < n) {
-            arr[d++] = arr1[i++];
+        if(j == m) {
+            while(i < n && count < k) {
+                ans = arr1[i];
+                i++;
+                count++;
+            }
         }
         
-        while(j < m) {
-            arr[d++] = arr2[j++];
-        }
-        
-        return arr[k-1];
+        return ans;
     }
 };
 
